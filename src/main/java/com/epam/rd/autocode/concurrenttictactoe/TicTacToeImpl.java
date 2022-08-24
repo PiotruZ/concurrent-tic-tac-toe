@@ -28,7 +28,7 @@ public class TicTacToeImpl implements TicTacToe {
 
     @Override
     public char[][] table() {
-        return Arrays.stream(board).map(char[]::clone).toArray(char[][]::new);
+        return Arrays.stream(board).map(char[]::clone).toArray(char[][]::new); //clone the board to a new char table
     }
 
     @Override
