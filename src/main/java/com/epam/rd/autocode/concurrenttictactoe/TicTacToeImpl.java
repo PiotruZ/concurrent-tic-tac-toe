@@ -6,16 +6,16 @@ public class TicTacToeImpl implements TicTacToe {
 
     final static char xM='X';
     final static char oM='O';
-    static char prevMark =oM;
+    char prevMark =oM;
 
-    static char[][] board;
+    char[][] board;
 
     public TicTacToeImpl() {
         newBoard();
     }
 
     @Override
-    public void setMark(int x, int y, char mark) {
+    synchronized public void setMark(int x, int y, char mark) {
         if(x>2||y>2||(mark!=xM&&mark!=oM))
             throw new IllegalArgumentException();
         if (board[x][y]==' ') {
@@ -27,16 +27,16 @@ public class TicTacToeImpl implements TicTacToe {
     }
 
     @Override
-    public char[][] table() {
+    synchronized public char[][] table() {
         return Arrays.stream(board).map(char[]::clone).toArray(char[][]::new); //clone the board to a new char table
     }
 
     @Override
-    public char lastMark() {
+    synchronized public char lastMark() {
         return prevMark;
     }
 
-    static private void newBoard() {
+    private void newBoard() {
         board= new char[][]{{' ', ' ', ' '},
                             {' ', ' ', ' '},
                             {' ', ' ', ' '},
